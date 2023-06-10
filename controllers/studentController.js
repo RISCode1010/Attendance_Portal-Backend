@@ -55,7 +55,8 @@ const forgotPassword = async (req, res) => {
 
     const token = student.getJwtToken();
 
-    const url = `http://localhost:${process.env.FRONTEND_PORT}/StudentResetPassword/${token}/`;
+    // const url = `http://localhost:${process.env.FRONTEND_PORT}/StudentResetPassword/${token}/`;
+    const url = `${process.env.FRONTEND_PORT}/StudentResetPassword/${token}/`;
 
     const message = `
           <h1>You have requested a password reset</h1>

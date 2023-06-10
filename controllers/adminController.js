@@ -112,7 +112,8 @@ const forgotPassword = async (req, res) => {
     const token = admin.getJwtToken();
     // console.log(token);
 
-    const url = `http://localhost:${process.env.FRONTEND_PORT}/AdminResetPassword/${token}/`;
+    // const url = `http://localhost:${process.env.FRONTEND_PORT}/AdminResetPassword/${token}/`;
+    const url = `${process.env.FRONTEND_PORT}/AdminResetPassword/${token}/`;
 
     const message = `
       <h1>You have requested a password reset</h1>
