@@ -20,6 +20,4 @@ router.route("/getAllStudent").post(adminAuth,getAllStudent);
 router.route("/getAllSubject").post(adminAuth,getAllSubject);
 
 
-
-
 module.exports = router;
