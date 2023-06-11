@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(
 	cors({
-		origin:"https://tiny-elf-ab2ec3.netlify.app",
+		origin:"http://localhost:3000",
 		credentials:true,
 	})
 )
