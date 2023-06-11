@@ -1,16 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieparser = require('cookie-parser');
-const cors = require("cors");
+var cors = require('cors');
 
 const app = express();
 
-// const corsOptions = {
-//     origin: true, //included origin as true
-//     credentials: true, //included credentials as true
-// };
+const corsOptions = {
+    origin: true, //included origin as true
+    credentials: true, //included credentials as true
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(cookieparser());
 app.use(express.json({
@@ -21,13 +21,6 @@ app.use(bodyParser.urlencoded({
     limit : '50mb',
     extended: true
 }))
-
-app.use(
-	cors({
-		origin:"http://localhost:3000",
-		credentials:true,
-	})
-)
 
 const adminRoute = require('./routes/adminRoute');
 const studentRoute = require('./routes/studentRoute');
