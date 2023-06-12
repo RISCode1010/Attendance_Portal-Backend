@@ -11,6 +11,8 @@ const addAdmin = async (req, res) => {
   try {
     const { name, email, dob, contactNumber, gender } = req.body;
 
+    console.log(JSON.stringify(req.headers));
+
     if (!name || !email || !dob || !contactNumber || !gender) {
       return res.status(400).json({
         success: false,
