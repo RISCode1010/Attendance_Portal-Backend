@@ -5,6 +5,10 @@ var cors = require('cors');
 
 const app = express();
 
+
+app.use(cookieparser());
+
+
 const corsOptions = {
     origin: true, //included origin as true
     credentials: true, //included credentials as true
@@ -18,13 +22,12 @@ app.use(cors(corsOptions));
 //     next();
 //  })
 
- app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with the actual origin of your frontend
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    next();
-  });
+//  app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with the actual origin of your frontend
+//     res.setHeader("Access-Control-Allow-Credentials", "true");
+//     next();
+//   });
 
-app.use(cookieparser());
 app.use(express.json({
     limit: "50mb"
 }));

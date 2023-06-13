@@ -80,6 +80,7 @@ const adminLogin = async (req, res) => {
     }
 
     const token = admin.getJwtToken();
+    console.log(`token ${token}`);
     res.cookie("adminToken", token, {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: true,
