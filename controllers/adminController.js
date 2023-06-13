@@ -11,7 +11,7 @@ const addAdmin = async (req, res) => {
   try {
     const { name, email, dob, contactNumber, gender } = req.body;
 
-    console.log(JSON.stringify(req.headers));
+    // console.log(JSON.stringify(req.headers));
 
     if (!name || !email || !dob || !contactNumber || !gender) {
       return res.status(400).json({
@@ -83,6 +83,7 @@ const adminLogin = async (req, res) => {
     res.cookie("adminToken", token, {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: false,
+      withCredentials: true,
     });
     res.status(201).json({message: "Login Successfully", token:token, admin: admin });
   } catch (err) {
