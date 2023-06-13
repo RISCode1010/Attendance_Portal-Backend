@@ -83,7 +83,6 @@ const adminLogin = async (req, res) => {
     res.cookie("adminToken", token, {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: false,
-      withCredentials: true,
     });
     res.status(201).json({message: "Login Successfully", token:token, admin: admin });
   } catch (err) {
