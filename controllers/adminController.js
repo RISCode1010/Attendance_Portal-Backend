@@ -82,7 +82,9 @@ const adminLogin = async (req, res) => {
     const token = admin.getJwtToken();
     res.cookie("adminToken", token, {
       expires: new Date(Date.now() + 25892000000),
-      httpOnly: false,
+      httpOnly: true,
+      sameSite:'none',
+      secure:true
     });
     res.status(201).json({message: "Login Successfully", token:token, admin: admin });
   } catch (err) {

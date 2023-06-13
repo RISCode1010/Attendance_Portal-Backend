@@ -9,7 +9,7 @@ const auth = async(req,res,next)=>{        /* function name => isAuthenticatedUs
 
         if (!adminToken) return res.send("Access denied. No token Provided");
 
-        // console.log(`get token by cookie : ${token}`);
+        console.log(adminToken);
             let decoded = jwt.verify(adminToken,process.env.KEY);
 
             const{id}=decoded;
