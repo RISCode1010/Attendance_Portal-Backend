@@ -27,7 +27,12 @@ const teacherLogin = async (req, res) => {
     }
 
     const token = teacher.getJwtToken();
-    res.cookie("teacherToken", token);
+    res.cookie("teacherToken", token, {
+      expires: new Date(Date.now() + 25892000000),
+      httpOnly: true,
+      sameSite:'none',
+      secure:true
+    });
     res.status(201).json({message: "Login Successfully", teacher: teacher, token: token });
   } catch (err) {
     res.json(err);

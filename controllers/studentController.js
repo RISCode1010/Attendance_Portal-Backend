@@ -26,7 +26,12 @@ const studentLogin = async (req, res) => {
     }
 
     const token = student.getJwtToken();
-    res.cookie("studentToken", token);
+    res.cookie("studentToken", token, {
+      expires: new Date(Date.now() + 25892000000),
+      httpOnly: true,
+      sameSite:'none',
+      secure:true
+    });
     res.status(201).json({message: "Login Successfully", student: student, token: token });
   } catch (err) {
     res.json(err);
