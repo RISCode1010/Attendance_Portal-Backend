@@ -28,13 +28,26 @@ const sendEmail = async (val)=>{
         html: val.text
     };
     // console.log("C");
-    await transporter.sendMail(mail,function(err,info){
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(info);
-        }
+    await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(mail, (err, info) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                console.log(info);
+                resolve(info);
+            }
+        });
     });
+
+    // await transporter.sendMail(mail,function(err,info){
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log(info);
+    //     }
+    // });
 }
 
 module.exports = sendEmail;
