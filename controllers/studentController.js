@@ -26,11 +26,18 @@ const studentLogin = async (req, res) => {
     }
 
     const token = student.getJwtToken();
+    // res.cookie("studentToken", token, {
+    //   expires: new Date(Date.now() + 25892000000),
+    //   httpOnly: true,
+    //   sameSite:'none',
+    //   secure:true
+    // });
     res.cookie("studentToken", token, {
-      expires: new Date(Date.now() + 25892000000),
+      path: "/",
       httpOnly: true,
-      sameSite:'none',
-      secure:true
+      expires: new Date(Date.now() + 1000 * 86400), // 1 day
+      sameSite: "none",
+      secure: true,
     });
     res.status(201).json({message: "Login Successfully", student: student, token: token });
   } catch (err) {
@@ -40,9 +47,17 @@ const studentLogin = async (req, res) => {
 
 const logout = (req, res) => {
   try {
-    res.clearCookie("studentToken");
-    res.status(200).json({message: "Logout Successfully"});
-    res.end();
+    // res.clearCookie("studentToken");
+    // res.status(200).json({message: "Logout Successfully"});
+    // res.end();
+    res.cookie("studentToken", "", {
+      path: "/",
+      httpOnly: true,
+      expires: new Date(0), // 1 day
+      sameSite: "none",
+      secure: true,
+    });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     res.json(error);
   }

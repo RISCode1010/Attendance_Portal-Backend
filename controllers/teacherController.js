@@ -27,11 +27,18 @@ const teacherLogin = async (req, res) => {
     }
 
     const token = teacher.getJwtToken();
+    // res.cookie("teacherToken", token, {
+    //   expires: new Date(Date.now() + 25892000000),
+    //   httpOnly: true,
+    //   sameSite:'none',
+    //   secure:true
+    // });
     res.cookie("teacherToken", token, {
-      expires: new Date(Date.now() + 25892000000),
+      path: "/",
       httpOnly: true,
-      sameSite:'none',
-      secure:true
+      expires: new Date(Date.now() + 1000 * 86400), // 1 day
+      sameSite: "none",
+      secure: true,
     });
     res.status(201).json({message: "Login Successfully", teacher: teacher, token: token });
   } catch (err) {
@@ -44,6 +51,14 @@ const logout = (req, res) => {
     res.clearCookie("teacherToken");
     res.status(200).json({message: "Logout Successfully"});
     res.end();
+    res.cookie("teacherToken", "", {
+      path: "/",
+      httpOnly: true,
+      expires: new Date(0), // 1 day
+      sameSite: "none",
+      secure: true,
+    });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     res.json(error);
   }

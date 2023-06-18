@@ -80,12 +80,19 @@ const adminLogin = async (req, res) => {
     }
 
     const token = admin.getJwtToken();
-    console.log(`token ${token}`);
+    // console.log(`token ${token}`);
+    // res.cookie("adminToken", token, {
+    //   expires: new Date(Date.now() + 25892000000),
+    //   httpOnly: true,
+    //   sameSite:'none',
+    //   secure:true
+    // });
     res.cookie("adminToken", token, {
-      expires: new Date(Date.now() + 25892000000),
+      path: "/",
       httpOnly: true,
-      sameSite:'none',
-      secure:true
+      expires: new Date(Date.now() + 1000 * 86400), // 1 day
+      sameSite: "none",
+      secure: true,
     });
     res.status(201).json({message: "Login Successfully", token:token, admin: admin });
   } catch (err) {
@@ -96,9 +103,17 @@ const adminLogin = async (req, res) => {
 //! Logout
 const logout = (req, res) => {
   try {
-    res.clearCookie("adminToken", { path: "/" });
-    res.status(200).json({message: "Logout Successfully"});
-    res.end();
+    // res.clearCookie("adminToken", { path: "/" });
+    // res.status(200).json({message: "Logout Successfully"});
+    // res.end();
+    res.cookie("adminToken", "", {
+      path: "/",
+      httpOnly: true,
+      expires: new Date(0), // 1 day
+      sameSite: "none",
+      secure: true,
+    });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     res.console(error);
   }
